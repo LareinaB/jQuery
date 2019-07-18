@@ -1,0 +1,79 @@
+html, body, div, ul, li {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    position: relative;
+    margin: 0 auto;
+    top: 20px;
+    width: 800px;
+    height: 300px;
+    border: solid slategray 1px;
+}
+
+.wrapper {
+    margin: 0 auto;
+    width: 800px;
+    height: 300px;
+    background-size: 100% 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.wrapper li {
+    position: absolute;
+    opacity: 0;
+    z-index: 0;
+}
+
+.focusBox {
+    position: absolute;
+    display: block;
+    height: 20px;
+    left: 40%;
+    transform: translate(50%, 50%);
+    bottom: 15px;
+    white-space: nowrap;
+    border: solid slategray 1px;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.focusBox li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    line-height: 10px;
+    margin: 5px;
+    background: grey;
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.focusBox li.select {
+    box-shadow: #373737 inset;
+    opacity: 1;
+}
+
+.arrow {
+    position: absolute;
+    display: none;
+    width: 60px;
+    height: 60px;
+    top: 110px;
+    opacity: 0.3;
+    z-index: 2;
+}
+
+.left {
+    left: 0;
+    background: url(img/left-circle.svg) no-repeat center;
+    background-size: 100% 100%;
+}
+
+.right {
+    right: 0;
+    background: url(img/right-circle.svg) no-repeat center;
+    background-size: 100% 100%;
+}

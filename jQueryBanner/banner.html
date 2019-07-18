@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <link rel="stylesheet" href="banner.css">
+</head>
+<body>
+<div class="container" id="container">
+    <ul class="wrapper">
+        <!--<li class="slide">-->
+            <!--<img src="" data-img="img/banner1.png" alt="">-->
+        <!--</li>-->
+    </ul>
+    <ul class="focusBox clearfix">
+        <!--<li class="select"></li>-->
+        <!--<li></li>-->
+        <!--<li></li>-->
+        <!--<li class="last"></li>-->
+    </ul>
+    <a href="javascript:;" class="arrow left"></a>
+    <a href="javascript:;" class="arrow right"></a>
+</div>
+
+<div class="container">
+    <ul class="wrapper">
+        <!--<li class="slide">-->
+        <!--<img src="" data-img="img/banner1.png" alt="">-->
+        <!--</li>-->
+    </ul>
+    <ul class="focusBox clearfix">
+        <!--<li class="select"></li>-->
+        <!--<li></li>-->
+        <!--<li></li>-->
+        <!--<li class="last"></li>-->
+    </ul>
+    <a href="javascript:;" class="arrow left"></a>
+    <a href="javascript:;" class="arrow right"></a>
+</div>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bannerPlugin.min.js"></script>
+<script>
+    $(".container").each(function () {
+        $(this).pluginBanner({url: 'json/banner.json'});
+    });
+</script>
+</body>
+</html>

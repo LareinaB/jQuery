@@ -1,19 +1,19 @@
 (function () {
     
-    // 21-94 定义一些变量和函数
+    //√ 21-94 定义一些变量和函数
 
     jQuery = function() {};
     //.....
 
-    // 96-283  给JQ对象添加一些方法和属性
+    //√  96-283  给JQ对象添加一些方法和属性
     jQuery.fn = jQuery.prototype = {};
     //.....
 
-    // 285-347  extend:将方法扩展到JQ原型上供实例使用
+    //√  285-347  extend:将方法扩展到JQ原型上供实例使用
     jQuery.extend = jQuery.fn.extend = function() {};
     //.....
 
-    // 349-817  jQuery.extend():扩展工具的方法
+    //√ 349-817  jQuery.extend():扩展工具的方法 通过扩展插件的形式 只传递第一个参数
     jQuery.extend({});
     //.....
 
@@ -23,7 +23,7 @@
         //.....
     );
     
-    // 2880-3042 JQ的回调对象处理，通过回调对象管理函数 对函数的统一管理
+    //√ 2880-3042 JQ的回调对象处理，通过回调对象管理函数 对函数的统一管理
     jQuery.Callbacks = function( options ){};
     //.....
 

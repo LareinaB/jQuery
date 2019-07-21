@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    
+    </style>
+</head>
+
+<body>
+        <!-- <div style="width: 100px; height: 100px; background: red; position: relative; float: left; top: 10px; left: 20px;z-index: 1;"></div>
+        <div style="width: 100px; height: 100px; background: blue; position: relative;"></div> -->
+    <script src="../jquery-2.0.3.min.js"></script>
+    <script>
+        // alert($.expando);
+
+        // var anotherName = $.noConflict();
+        // var $ = 123;
+        // anotherName(function () {
+        //     alert($);
+        // })
+
+        // function StrToInt(str){
+        //     // write code here
+        //     var reg = /^([-+]?)(\d|[1-9]\d+)(\.\d+)?$/;
+        //     console.log(str.match(reg));
+        //     str.replace(reg, function () {
+        //         console.log(arguments);
+        //     });
+        //     if(reg.test(str)){
+        //         return Number(str);
+        //     }else{
+        //         return 0;
+        //     }
+        // }
+
+        // 最终调用的就是$.ready()
+        // readyList.resolveWith( document, [ jQuery ] );
+        // this是document， args是jQuery这个函数
+        // $(function(args){
+        //     alert(this);
+        //     alert(args);
+        // })
+
+        // DOM触发的三种情况
+        // $(function(){});
+        // $(document).ready(function(){});
+        // $(document).on('ready', function(){});
+
+        // holdReady的用法
+        // $.getScript('a.js', function () { 
+        //     $.holdReady(false);
+        //  });
+        // $(function () {
+        //     alert(222);
+        // });
+        // hold为true时要jQuery.readyWait++
+        // 释放延迟的时候就会--，为0的时候就到ready里面执行
+        // var a = 'hello';
+        // console.log($.type(a))
+        // function isEmptyObject(obj) {
+        //     var key;
+        //     for(key in obj){
+        //         return false;
+        //     }
+        //     return true
+        // }
+        // function A(){}
+        // var aa = new A;
+        // console.log(isEmptyObject(aa));
+        // function B(){
+        //     this.name  ='jQuery';
+        // }
+        // var bb = new B;
+        // console.log(isEmptyObject(bb));
+
+        // var str = '<li>aaaaa</li><script><\/script>';
+        // console.log($.parseHTML(str), document, true);
+        // 将function内部的变量解析为全局变量
+        // function test() {
+        //     jQuery.globalEval("var newVar = true;");
+        // }
+        // test();
+        // console.log(newVar);
+        // function testAgain(){
+        //     window.eval('var a = 1');
+        // }
+        // testAgain();
+        // console.log(a);
+        // console.log($.camelCase('moz-slw'));
+
+        // var ary = [1,2,3,4];
+        // var ret = [3,4,5,6];
+        // console.log($.merge(ary, ret));
+
+        // console.log($('body').init('.box'));
+        // function show(){
+        //     alert(this);
+        // }
+        // $.proxy(show, document, 3)(4);
+        // $.proxy(show, document, 3, 4)();
+        // $.proxy(show, document)(3, 4);
+        // $.proxy(document, 'show');
+        // console.dir($('div').innerWidth);
+        // var oDiv = document.querySelectorAll('div');
+        // alert(oDiv[0])
+        // var style = window.getComputedStyle(oDiv[0],null);
+        // alert(style.zIndex)
+        function fn(){
+            console.log($.isArraylike(arguments));
+        }
+        fn();
+    </script>
+    
+    
+</body>
+
+</html>

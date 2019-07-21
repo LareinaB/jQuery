@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="jquery-2.0.3.min.js"></script>
+    <script>
+        // var obj = {};
+        // $.extend(obj, { name: 'javascript' }, { age: 23 });
+        // console.log(obj);
+
+        // 效果跟Object.create()是一样的 浅拷贝
+        // var a = {};
+        // var c = {};
+        // var b = {name: 'javascript', ary: [1,2,3]};
+        // $.extend(a, b);
+        // a.name = 'html';
+        // console.log(b.name);  // javascript
+        // a.ary[0] = 100;
+        // console.log(b.ary);  // 100,2,3
+
+        // 深拷贝
+        // $.extend(true, c, b);
+        // c.ary[0] = 100;
+        // console.log(b.ary);  // 1,2,3
+
+        // var name = {}
+        // $.extend(name, {name: name});
+
+        function A() { 
+            this.name = 'javascript';
+            this.ary = [1,2,3];
+         }
+        function B() {
+            this.age = 10;
+        }
+        $.extend(true, A(), B());
+        var b = new B;
+        console.log(b.name); // undefined 只能是对象或者数组，函数不行
+        
+    </script>
+
+</body>
+</html>

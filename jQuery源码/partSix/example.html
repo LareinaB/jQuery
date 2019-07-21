@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="点击">
+    <script src="../jquery-2.0.3.js"></script>
+    <script>
+        // ~function () {
+        //     var cb = $.Callbacks('memory');
+        //     cb.add(function () {
+        //         alert(1);
+        //     });
+        //     cb.fire();
+        //     $('input').click(function () {
+        //         cb.add(function () {
+        //             alert(2);
+        //         });
+        //     });
+        // }();
+
+        var dfd = $.Deferred();
+        setTimeout(function () {
+            alert(111);
+            dfd.resolve();
+        }, 1000);
+
+        dfd.done(function () {
+            alert('aaa');
+        });
+        $('input').click(function () {
+            dfd.done(function () {
+                alert(222);
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

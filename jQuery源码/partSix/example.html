@@ -6,12 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        .container{
+            width: 500px;
+            height: 100px;
+            border: 1px solid red;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        img{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
 </head>
 
 <body>
     <input type="button" value="点击">
+    <div class="container">
+        <img src="11.png">
+        <span>这是一只大黑猫</span>
+    </div>
     <script src="../jquery-2.0.3.js"></script>
-    <script>
+    <script src="example.js">
         // ~function () {
         //     var cb = $.Callbacks('memory');
         //     cb.add(function () {
@@ -25,6 +44,7 @@
         //     });
         // }();
 
+        /*
         var dfd = $.Deferred();
         setTimeout(function () {
             alert(111);
@@ -39,9 +59,8 @@
                 alert(222);
             });
         });
-
+        */
     </script>
-
 </body>
 
 </html>

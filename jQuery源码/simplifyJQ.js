@@ -27,7 +27,7 @@
     jQuery.Callbacks = function( options ){};
     //.....
 
-    // 3043-3183 延迟对象 对异步的统一管理
+    //√ 3043-3183 延迟对象 对异步的统一管理
     jQuery.extend({
         Deferred : function(){}
         //.....

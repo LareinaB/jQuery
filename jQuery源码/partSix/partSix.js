@@ -65,6 +65,7 @@ jQuery.extend({
 					state = stateString;
 
 				// [ reject_list | resolve_list ].disable; progress_list.lock
+				// i ^ 1 i = 0的话结果就是1，反之0
 				}, tuples[ i ^ 1 ][ 2 ].disable, tuples[ 2 ][ 2 ].lock );
 			}
 
@@ -77,6 +78,7 @@ jQuery.extend({
 		});
 
 		// Make the deferred a promise
+		// 把promise的所有方法扩展到deferred上
 		promise.promise( deferred );
 
 		// Call given func if any
@@ -89,15 +91,20 @@ jQuery.extend({
 	},
 
 	// Deferred helper
+	// 针对多延迟对象的操作 参数必须是Deferred对象
 	when: function( subordinate /* , ..., subordinateN */ ) {
+		// length存的要延迟的方法的数量，resolve完一个就length--
+		
 		var i = 0,
 			resolveValues = core_slice.call( arguments ),
 			length = resolveValues.length,
 
 			// the count of uncompleted subordinates
+			// 状态为改变为resolve的延迟对象的数量
 			remaining = length !== 1 || ( subordinate && jQuery.isFunction( subordinate.promise ) ) ? length : 0,
 
 			// the master Deferred. If resolveValues consist of only a single Deferred, just use that.
+			// remaining为0的时候就创建一个延迟对象 用来触发done回调函数
 			deferred = remaining === 1 ? subordinate : jQuery.Deferred(),
 
 			// Update function for both resolve and progress values
@@ -120,6 +127,7 @@ jQuery.extend({
 			progressValues = new Array( length );
 			progressContexts = new Array( length );
 			resolveContexts = new Array( length );
+			// 循环对传入的参数处理 是延迟对象就处理，不是就--remaining继续下一个
 			for ( ; i < length; i++ ) {
 				if ( resolveValues[ i ] && jQuery.isFunction( resolveValues[ i ].promise ) ) {
 					resolveValues[ i ].promise()
@@ -133,6 +141,7 @@ jQuery.extend({
 		}
 
 		// if we're not waiting on anything, resolve the master
+		// 针对不传参的情况 或参数不是延迟对象的时候
 		if ( !remaining ) {
 			deferred.resolveWith( resolveContexts, resolveValues );
 		}

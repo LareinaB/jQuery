@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="box" xxx=""></div>
+
+
+    <script src="../jquery-2.0.3.js"></script>
+    <script>
+        $(function() {
+            // 往元素上添加属性 不适合很多数据
+            // $('#box').attr('name', 'hello');
+            // alert($('#box').attr('name'));
+            // document.getElementById('box').setAttribute('name', 'hello');
+            // document.getElementById('box').getAttribute('name');
+
+            // $('#box').prop('name', 'hello');
+            // alert($('#box').prop('name'));
+            // document.getElementById('box')['name'] = 'hello';
+            // document.getElementById('box')['name'];
+
+            $('body').data('age', obj);
+            $('#box').data('name', obj);
+
+            var chahe  = {
+                1 : {
+                    name: obj
+                },
+                2: {
+                    age: obj
+                }
+            };
+
+
+            alert($('#box').data('name'));
+        });
+    </script>
+</body>
+</html>

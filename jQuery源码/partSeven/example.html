@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="eaxmple.js"></script>
+</head>
+<body>
+    <!-- <div id="aa" style="background: red">
+        1111111
+    </div> -->
+
+    <script src="../jquery-2.0.3.js"></script>
+    <script>
+        // console.dir($.support);
+        // var _support = $.support;
+        // $(function(){
+        //     for(var attr in _support){
+        //         $('body').append(`<div> ${attr} + : + ${_support[attr]} </div>`);
+        //     }
+        // });
+        var div = $('<div>');
+        console.dir(div);
+        div.css('backgroundColor', 'red');
+        div.width = '100px';
+        div.height = '100px';
+        div[0].style.display = 'block';
+        $('body').append(div);
+    </script>
+    
+</body>
+</html>

@@ -138,7 +138,15 @@
             // var obj = Object.create(proxy);
             // console.log(obj.name);
 
-            
+            $('#box').data('name-age', 'hello');
+
+            // 会先看cache有没有nameAge属性，若没有就设置为驼峰形式
+            // 若有就设置成name-age形式，但原有的驼峰属性的属性值会被当前设置的这个覆盖
+            this.cache = {
+                1: {
+                    'nameAge': 'hello'
+                }
+            }
         });
     </script>
 </body>

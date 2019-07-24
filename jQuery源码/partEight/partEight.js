@@ -6,25 +6,30 @@ var data_user, data_priv,
 function Data() {
 	// Support: Android < 4,
 	// Old WebKit does not have Object.preventExtensions/freeze method,
-	// return new empty object instead with no [[set]] accessor
+    // return new empty object instead with no [[set]] accessor
+    // 属性为0的，不会设置值 即非元素节点或者document不允许设置data
 	Object.defineProperty( this.cache = {}, 0, {
 		get: function() {
 			return {};
 		}
 	});
 
+    // expando是JQ版本加随机数  这里又再加上了一串随机数 唯一标识
+    // 用来表示设置data的属性名
 	this.expando = jQuery.expando + Math.random();
 }
 
 Data.uid = 1;
 
+// 判断节点类型
 Data.accepts = function( owner ) {
 	// Accepts only:
 	//  - Node
 	//    - Node.ELEMENT_NODE
 	//    - Node.DOCUMENT_NODE
 	//  - Object
-	//    - Any
+    //    - Any
+    // 元素节点或者document返回真，否则返回假
 	return owner.nodeType ?
 		owner.nodeType === 1 || owner.nodeType === 9 : true;
 };
@@ -34,12 +39,14 @@ Data.prototype = {
 		// We can accept data for non-element nodes in modern browsers,
 		// but we should not, see #8335.
 		// Always return the key for a frozen object.
-		if ( !Data.accepts( owner ) ) {
+        // 非元素节点或者document时 返回0
+        if ( !Data.accepts( owner ) ) {
 			return 0;
 		}
 
 		var descriptor = {},
-			// Check if the owner object already has a cache key
+            // Check if the owner object already has a cache key
+            // owner就是当前要添加data属性的元素
 			unlock = owner[ this.expando ];
 
 		// If not, create one
@@ -74,14 +81,17 @@ Data.prototype = {
 			unlock = this.key( owner ),
 			cache = this.cache[ unlock ];
 
-		// Handle: [ owner, key, value ] args
+        // Handle: [ owner, key, value ] args
+        // 直接赋值
 		if ( typeof data === "string" ) {
 			cache[ data ] = value;
 
-		// Handle: [ owner, { properties } ] args
+        // Handle: [ owner, { properties } ] args
+        // 若添加的属性是对象 就要循环遍历
 		} else {
 			// Fresh assignments by object are shallow copied
 			if ( jQuery.isEmptyObject( cache ) ) {
+                // extend内部也是循环呀
 				jQuery.extend( this.cache[ unlock ], data );
 			// Otherwise, copy the properties one-by-one to the cache object
 			} else {
@@ -142,12 +152,14 @@ Data.prototype = {
 			unlock = this.key( owner ),
 			cache = this.cache[ unlock ];
 
+        // 什么都不传就默认清空所有
 		if ( key === undefined ) {
 			this.cache[ unlock ] = {};
 
 		} else {
 			// Support array or space separated string of keys
 			if ( jQuery.isArray( key ) ) {
+                // 可以传递一个数组进来
 				// If "name" is an array of keys...
 				// When data is initially created, via ("key", "val") signature,
 				// keys will be converted to camelCase.
@@ -163,7 +175,8 @@ Data.prototype = {
 				} else {
 					// If a key with the spaces exists, use it.
 					// Otherwise, create an array by matching non-whitespace
-					name = camel;
+                    name = camel;
+                    // 删除一个不存在属性时就不作处理 返回一个空数组
 					name = name in cache ?
 						[ name ] : ( name.match( core_rnotwhite ) || [] );
 				}
@@ -218,23 +231,26 @@ jQuery.extend({
 	}
 });
 
+// 获取只会返回第一个
 jQuery.fn.extend({
 	data: function( key, value ) {
+        // 先保存第一项
 		var attrs, name,
 			elem = this[ 0 ],
 			i = 0,
 			data = null;
 
-		// Gets all values
+		// Gets all values key不传值会return所有的值
 		if ( key === undefined ) {
 			if ( this.length ) {
 				data = data_user.get( elem );
 
 				if ( elem.nodeType === 1 && !data_priv.get( elem, "hasDataAttrs" ) ) {
-					attrs = elem.attributes;
+                    // 所有属性的集合
+                    attrs = elem.attributes;
 					for ( ; i < attrs.length; i++ ) {
 						name = attrs[ i ].name;
-
+                        // 用data-方式添加的属性
 						if ( name.indexOf( "data-" ) === 0 ) {
 							name = jQuery.camelCase( name.slice(5) );
 							dataAttr( elem, name, data[ name ] );
@@ -317,12 +333,14 @@ jQuery.fn.extend({
 	}
 });
 
+// h5的方式
 function dataAttr( elem, key, data ) {
 	var name;
 
 	// If nothing was found internally, try to fetch any
 	// data from the HTML5 data-* attribute
 	if ( data === undefined && elem.nodeType === 1 ) {
+        // "-$1"正则中的第一个子项
 		name = "data-" + key.replace( rmultiDash, "-$1" ).toLowerCase();
 		data = elem.getAttribute( name );
 
@@ -331,8 +349,10 @@ function dataAttr( elem, key, data ) {
 				data = data === "true" ? true :
 					data === "false" ? false :
 					data === "null" ? null :
-					// Only convert to a number if it doesn't change the string
-					+data + "" === data ? +data :
+                    // Only convert to a number if it doesn't change the string
+                    // 字符串数字存为数字
+                    +data + "" === data ? +data :
+                    // rbrace表示{}[]的正则，
 					rbrace.test( data ) ? JSON.parse( data ) :
 					data;
 			} catch( e ) {}

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
 
     <div id="box" xxx=""></div>
@@ -13,7 +15,7 @@
 
     <script src="../jquery-2.0.3.js"></script>
     <script>
-        $(function() {
+        $(function () {
             // 往元素上添加属性 不适合很多数据
             // $('#box').attr('name', 'hello');
             // alert($('#box').attr('name'));
@@ -25,21 +27,119 @@
             // document.getElementById('box')['name'] = 'hello';
             // document.getElementById('box')['name'];
 
-            $('body').data('age', obj);
-            $('#box').data('name', obj);
+            // $('body').data('age', obj);
+            // $('#box').data('name', obj);
 
-            var chahe  = {
-                1 : {
-                    name: obj
+            // var chahe  = {
+            //     1 : {
+            //         name: obj
+            //     },
+            //     2: {
+            //         age: obj
+            //     }
+            // };
+
+
+            // alert($('#box').data('name'));
+
+            var obj = { name: 'hello' };
+            // // 禁止修改 有兼容问题
+            // Object.freeze(obj);
+            // // 无效
+            // obj.name = 'hi';
+            // alert(obj.name);
+
+            // Object.defineProperty(obj, 0, {
+            //     get : function () {
+            //         return {};
+            //       }
+            // });
+
+            // alert(obj[0]);
+            // // 无效
+            // obj[0] = 23;
+            // alert(obj[0]);
+
+            // Object.defineProperty
+            // var obj = {
+            //     name: 'javascript',
+            //     age: 8,
+            //     info: {
+            //         action: 'mutual',
+            //         feature: 'smart'
+            //     }
+            // }
+
+            // observer(obj);
+
+            // obj.sex = 'female'
+            // obj.info.face = 20;
+            // obj.info.hobit = 'girl';
+            // obj.age = 10;
+            // obj.info.feature = 'samll';
+
+            // console.log(obj);
+
+            // function observer(target) {
+            //     if (!target || typeof target !== 'object') {
+            //         return;
+            //     }
+            //     // 遍历对象中的每一个属性
+            //     Object.keys(target).forEach(function (val) {
+            //         definePro(target, target[val], val);
+            //     });
+            // }
+
+            // function definePro(curObj, curVal, curKey) {
+
+            //     observer(curVal); // 遍历子属性
+
+            //     Object.defineProperty(curObj, curKey, {
+            //         enumerable: true,
+            //         configurable: true,
+            //         get: function () {
+            //             console.log('获取属性', curVal);
+            //             return curVal;
+            //         },
+            //         set: function (newVal) {
+            //             console.log('设置属性', newVal);
+            //             curObj = newVal;
+            //         }
+            //     });
+            // }
+
+            // proxy
+            var obj = new Proxy({}, {
+                get: function (target, key, receiver) {
+                    console.log(`getting ${key}!`);
+                    return Reflect.get(target, key, receiver);
                 },
-                2: {
-                    age: obj
+                set: function (target, key, value, receiver) {
+                    console.log(`setting ${key}!`);
+                    return Reflect.set(target, key, value, receiver);
                 }
-            };
+            });
 
+            obj.name = 'html'; //setting name!
+            obj.name; // getting name!
 
-            alert($('#box').data('name'));
+            // var target = {};
+            // var handler = {};
+            // var proxy = new Proxy(target, handler);
+            // proxy.a = 'b';
+            // console.log(target.a) // "b"
+
+            var proxy = new Proxy({}, {
+                get: function(target, property){
+                    return 'ES6';
+                }
+            });
+
+            var obj = Object.create(proxy);
+            console.log(obj.name);
+
         });
     </script>
 </body>
+
 </html>
